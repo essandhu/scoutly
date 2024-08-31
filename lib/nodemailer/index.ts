@@ -1,19 +1,18 @@
-"use server"
-
-import { EmailContent, EmailProductInfo, NotificationType } from '@/types';
-import nodemailer from 'nodemailer';
+"use server";
+import { EmailContent, EmailProductInfo, NotificationType } from "@/types";
+import nodemailer from "nodemailer";
 
 const Notification = {
-  WELCOME: 'WELCOME',
-  CHANGE_OF_STOCK: 'CHANGE_OF_STOCK',
-  LOWEST_PRICE: 'LOWEST_PRICE',
-  THRESHOLD_MET: 'THRESHOLD_MET',
-}
+  WELCOME: "WELCOME",
+  CHANGE_OF_STOCK: "CHANGE_OF_STOCK",
+  LOWEST_PRICE: "LOWEST_PRICE",
+  THRESHOLD_MET: "THRESHOLD_MET",
+};
 
 export async function generateEmailBody(
   product: EmailProductInfo,
   type: NotificationType
-  ) {
+) {
   const THRESHOLD_PERCENTAGE = 40;
   // Shorten the product title
   const shortenedTitle =
@@ -29,7 +28,7 @@ export async function generateEmailBody(
       subject = `Welcome to Price Tracking for ${shortenedTitle}`;
       body = `
         <div>
-          <h2>Welcome to PriceWise 🚀</h2>
+          <h2>Welcome to Scoutly 🚀</h2>
           <p>You are now tracking ${product.title}.</p>
           <p>Here's an example of how you'll receive updates:</p>
           <div style="border: 1px solid #ccc; padding: 10px; background-color: #f8f8f8;">
@@ -82,26 +81,29 @@ export async function generateEmailBody(
 
 const transporter = nodemailer.createTransport({
   pool: true,
-  service: 'hotmail',
+  service: "hotmail",
   port: 2525,
   auth: {
-    user: 'javascriptmastery@outlook.com',
+    user: "scoutly-alerts@outlook.com",
     pass: process.env.EMAIL_PASSWORD,
   },
-  maxConnections: 1
-})
+  maxConnections: 1,
+});
 
-export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
+export const sendEmail = async (
+  emailContent: EmailContent,
+  sendTo: string[]
+) => {
   const mailOptions = {
-    from: 'javascriptmastery@outlook.com',
+    from: "scoutly-alerts@outlook.com",
     to: sendTo,
     html: emailContent.body,
     subject: emailContent.subject,
-  }
+  };
 
   transporter.sendMail(mailOptions, (error: any, info: any) => {
-    if(error) return console.log(error);
-    
-    console.log('Email sent: ', info);
-  })
-}
+    if (error) return console.log(error);
+
+    console.log("Email sent: ", info);
+  });
+};
