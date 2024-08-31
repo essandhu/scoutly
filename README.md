@@ -10,7 +10,7 @@ Try it out [here!](https://scoutly-pink.vercel.app/)
 - [x] **Automatic Updates:** Product data is automatically retrieved and refreshed every day
 - [x] **Trending Products:** Shows which products other users have recently browsed
 - [x] **Email Alerts:** Sign up to track your favorite products and receive an email when price drops occur
-<br/>Planned Updates:<br/>
+<br/><br/>Planned Updates:<br/>
 - [ ] Implement favorites list for products, based on user's account
 - [ ] Fix certain sections (such as price and review count) display their respective values twice
 - [ ] Enable custom thresholds for email alerts
